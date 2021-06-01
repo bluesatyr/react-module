@@ -16,21 +16,28 @@ function App() {
     ]);
   
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
-  
+  const [contactSelected, setContactSelected] = useState(false);
+
   return (
     <div>
       <Nav
+        // props sent to Nav component
         categories={categories}
         setCurrentCategory={setCurrentCategory}
         currentCategory={currentCategory}
+        contactSelected={contactSelected}
+        setContactSelected={setContactSelected}
       ></Nav>
       <main>
         <div>
-          <ContactForm />
-          <Gallery 
-            currentCategory={currentCategory}
-          />
-          <About />
+          {!contactSelected ? (
+            <>
+              <Gallery currentCategory={currentCategory}></Gallery>
+              <About />
+            </>
+          ) : (
+            <ContactForm />
+          )}
         </div>
       </main>
     </div>
